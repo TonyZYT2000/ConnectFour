@@ -1,5 +1,4 @@
 *.o
 *.swp
 *.exe
-bin/*
 obj/*

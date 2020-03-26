@@ -5,6 +5,7 @@ CFLAGS = -Wall -g -std=c11
 OBJ_DIR = obj
 TARGETS = $(OBJ_DIR)/board.o $(OBJ_DIR)/player.o $(OBJ_DIR)/driver.o
 
+default: ConnectFour.exe
 
 ConnectFour.exe: $(TARGETS)
 	$(CC) $(CFLAGS) -o ConnectFour.exe $(TARGETS)

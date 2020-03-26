@@ -10,6 +10,13 @@ default: ConnectFour.exe
 ConnectFour.exe: $(TARGETS)
 	$(CC) $(CFLAGS) -o ConnectFour.exe $(TARGETS)
 
+tester.exe: $(OBJ_DIR)/board.o $(OBJ_DIR)/test.o
+	$(CC) $(CFLAGS) -o tester.exe $(OBJ_DIR)/board.o $(OBJ_DIR)/test.o
+
+$(OBJ_DIR)/test.o: $(OBJ_DIR) test.c board.h
+	$(CC) $(CFLAGS) -c test.c
+	mv test.o $(OBJ_DIR)
+
 $(OBJ_DIR)/board.o: $(OBJ_DIR) board.c board.h
 	$(CC) $(CFLAGS) -c board.c
 	mv board.o $(OBJ_DIR)
@@ -26,5 +33,6 @@ $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
 clean:
-	rm ConnectFour.exe
+	rm -f ConnectFour.exe
+	rm -f tester.exe
 	rm -rf obj/*

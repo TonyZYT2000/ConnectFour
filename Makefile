@@ -1,3 +1,8 @@
+.PHONY: all
+.PHONY: tester
+.PHONY: board
+.PHONY: player
+.PHONY: driver
 .PHONY: clean
 
 CC = gcc
@@ -5,7 +10,15 @@ CFLAGS = -Wall -g -std=c11
 OBJ_DIR = obj
 TARGETS = $(OBJ_DIR)/board.o $(OBJ_DIR)/player.o $(OBJ_DIR)/driver.o
 
-default: ConnectFour.exe
+all: ConnectFour.exe tester.exe
+
+tester: tester.exe
+
+board: $(OBJ_DIR)/board.o
+
+player: $(OBJ_DIR)/player.o
+
+driver: $(OBJ_DIR)/driver.o
 
 ConnectFour.exe: $(TARGETS)
 	$(CC) $(CFLAGS) -o ConnectFour.exe $(TARGETS)

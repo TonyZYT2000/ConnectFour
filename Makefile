@@ -1,10 +1,15 @@
 .PHONY: clean
 
-bin:
-	mkdir bin
+CC = gcc
+CFLAGS = -Wall -g -std=c11
+OBJ_DIR = obj
+BIN_DIR = bin
 
-obj:
-	mkdir obj
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+$(BIN_DIR):
+	mkdir $(BIN_DIR)
 
 clean:
 	rm -rf bin/*

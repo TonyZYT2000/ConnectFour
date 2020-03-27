@@ -4,6 +4,7 @@
 #include "board.h"
 
 #define EMPTY '.'
+#define NEWLINE "\n"
 #define INDEX(X, Y) X * this->width + Y
 
 typedef struct Board {
@@ -21,11 +22,12 @@ void print_Board(Board * this) {
         for (int col = 0; col < this->width; col++) {
             printf("%c ", this->checker[INDEX(row, col)]);
         }
-        printf("\n");
+        printf(NEWLINE);
     }
     for (int col = 0; col < this->width; col++) {
         printf("%d ", col + 1);
     }
+    printf(NEWLINE);
 }
 
 void clear_Board(Board * this) {
@@ -36,7 +38,24 @@ void clear_Board(Board * this) {
     }
 }
 
-void put(Board * this, int col, char chess) {
+bool put(Board * this, int colNo, char chess) {
+    int row = 0;
+    int col = colNo - 1;
+    while (row < this->height) {
+        if (this->checker[INDEX(row, col)] != EMPTY)
+            break;
+        else
+            row += 1;
+    }
+
+    row -= 1;
+
+    if (row >= 0) {
+        this->checker[INDEX(row, col)] = chess;
+        return true;
+    }
+    else
+        return false;
 }
 
 Board * new_Board(int width, int height) {

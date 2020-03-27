@@ -1,5 +1,7 @@
 #ifndef BOARD_H
-#define LIST_H
+#define BOARD_H
+
+#include <stdbool.h>
 
 typedef struct Board Board;
 
@@ -9,7 +11,7 @@ void print_Board(Board * this);
 
 void clear_Board(Board * this);
 
-void put(Board * this, int col, char chess);
+bool put(Board * this, int colNo, char chess);
 
 Board * new_Board(int width, int height);
 

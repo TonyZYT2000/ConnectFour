@@ -29,6 +29,11 @@ void print_Board(Board * this) {
 }
 
 void clear_Board(Board * this) {
+    for (int row = 0; row < this->height; row++) {
+        for (int col = 0; col < this->width; col++) {
+            this->checker[INDEX(row, col)] = EMPTY;
+        }
+    }
 }
 
 void put(Board * this, int col, char chess) {
@@ -41,11 +46,8 @@ Board * new_Board(int width, int height) {
     this->height = height;
     this->checker = malloc(sizeof(char) * width * height);
 
-    for (int row = 0; row < height; row++) {
-        for (int col = 0; col < width; col++) {
-            this->checker[INDEX(row, col)] = EMPTY;
-        }
-    }
+    clear_Board(this);
+
     return this;
 }
 

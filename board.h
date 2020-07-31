@@ -3,9 +3,14 @@
 
 #include <stdbool.h>
 
-typedef struct Board Board;
+typedef struct Board {
+    bool win;
+    int width;
+    int height;
+    char* checker;
+} Board;
 
-void checkwin(Board * this);
+void checkwin(Board * this, int colNo);
 
 void print_Board(Board * this);
 

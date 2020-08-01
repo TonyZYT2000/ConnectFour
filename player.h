@@ -4,13 +4,13 @@
 #include "board.h"
 
 typedef struct Player {
-    char* chess;
+    char chess;
     Board* board;
-    void (*move)(Player *);
+    void (*move)(void *);
 } Player;
 
-Player * new_Player(Board * board, void (*move)(Player *));
+Player * new_Player(char chess, Board * board, void (*move)(void *));
 
-void human_Move(Player * this);
+void human_Move(void * this);
 
 #endif

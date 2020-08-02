@@ -49,11 +49,11 @@ int human_Move(Player * this) {
 
 int rand_Move(Player * this) {
     srand(time(0));
-    int col = rand() % this->board->width;
+    int col = rand() % this->board->width + 1;
 
     bool success = put(this->board, col, this->chess);
     while (!success) {
-        col = rand() % this->board->width;
+        col = rand() % this->board->width + 1;
         success = put(this->board, col, this->chess);
     }
 

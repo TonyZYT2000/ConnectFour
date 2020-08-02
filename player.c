@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "player.h"
 
 
-Player * new_Player(char chess, Board * board, void (*move)(void *)) {
+Player * new_Player(char chess, Board * board, void (*move)(Player *)) {
     Player * this = malloc(sizeof(Player));
     this->chess = chess;
     this->board = board;
@@ -12,9 +13,8 @@ Player * new_Player(char chess, Board * board, void (*move)(void *)) {
     return this;
 }
 
-void human_Move(void * player) {
+void human_Move(Player * this) {
     int col = 0;
-    Player * this = (Player*) player;
 
     printf("Please enter a column number: ");
     scanf("%d", &col);

@@ -8,6 +8,99 @@
 #define NEWLINE "\n"
 #define INDEX(X, Y) X * this->width + Y
 
+static bool check_Hori(Board * this, int row, int col, char chess);
+static bool check_Vert(Board * this, int row, int col, char chess);
+static bool check_Diag(Board * this, int row, int col, char chess);
+
+Board * new_Board(int width, int height) {
+    Board * this = malloc(sizeof(Board));
+    this->win = false;
+    this->full = false;
+    this->width = width;
+    this->height = height;
+    this->checker = malloc(sizeof(char) * width * height);
+
+    clear_Board(this);
+
+    return this;
+}
+
+void delete_Board(Board ** toDelete) {
+    Board * this = *toDelete;
+    free(this->checker);
+    free(this);
+    *toDelete = NULL;
+}
+
+void print_Board(Board * this) {
+    for (int row = 0; row < this->height; row++) {
+        for (int col = 0; col < this->width; col++) {
+            printf("%c ", this->checker[INDEX(row, col)]);
+        }
+        printf(NEWLINE);
+    }
+    for (int col = 0; col < this->width; col++) {
+        printf("%d ", col + 1);
+    }
+    printf(NEWLINE);
+}
+
+void clear_Board(Board * this) {
+    for (int row = 0; row < this->height; row++) {
+        for (int col = 0; col < this->width; col++) {
+            this->checker[INDEX(row, col)] = EMPTY;
+        }
+    }
+}
+
+void checkwin(Board * this, int colNo) {
+    int row = 0;
+    int col = colNo - 1;
+
+    while (this->checker[INDEX(row, col)] == EMPTY) {
+        row += 1;
+    }
+
+    char chess = this->checker[INDEX(row, col)];
+
+    this->win = check_Hori(this, row, col, chess) ||
+        check_Vert(this, row, col, chess) ||
+        check_Diag(this, row, col, chess);
+}
+
+void checkfull(Board * this) {
+    int row = 0;
+
+    for (int col = 0; col < this->width; col++) {
+        if (this->checker[INDEX(row, col)] == EMPTY) {
+            this->full = false;
+            return;
+        }
+    }
+
+    this->full = true;
+}
+
+bool put(Board * this, int colNo, char chess) {
+    int row = 0;
+    int col = colNo - 1;
+    while (row < this->height) {
+        if (this->checker[INDEX(row, col)] != EMPTY)
+            break;
+        else
+            row += 1;
+    }
+
+    row -= 1;
+
+    if (row >= 0) {
+        this->checker[INDEX(row, col)] = chess;
+        return true;
+    }
+    else
+        return false;
+}
+
 static bool check_Hori(Board * this, int row, int col, char chess) {
     int count = 0;
     int colIndex = (col - GOAL + 1) > 0 ? (col - GOAL + 1) : 0;
@@ -117,77 +210,3 @@ static bool check_Diag(Board * this, int row, int col, char chess) {
     return false;
 }
 
-void checkwin(Board * this, int colNo) {
-    int row = 0;
-    int col = colNo - 1;
-
-    while (this->checker[INDEX(row, col)] == EMPTY) {
-        row += 1;
-    }
-
-    char chess = this->checker[INDEX(row, col)];
-
-    this->win = check_Hori(this, row, col, chess) ||
-        check_Vert(this, row, col, chess) ||
-        check_Diag(this, row, col, chess);
-}
-
-void print_Board(Board * this) {
-    for (int row = 0; row < this->height; row++) {
-        for (int col = 0; col < this->width; col++) {
-            printf("%c ", this->checker[INDEX(row, col)]);
-        }
-        printf(NEWLINE);
-    }
-    for (int col = 0; col < this->width; col++) {
-        printf("%d ", col + 1);
-    }
-    printf(NEWLINE);
-}
-
-void clear_Board(Board * this) {
-    for (int row = 0; row < this->height; row++) {
-        for (int col = 0; col < this->width; col++) {
-            this->checker[INDEX(row, col)] = EMPTY;
-        }
-    }
-}
-
-bool put(Board * this, int colNo, char chess) {
-    int row = 0;
-    int col = colNo - 1;
-    while (row < this->height) {
-        if (this->checker[INDEX(row, col)] != EMPTY)
-            break;
-        else
-            row += 1;
-    }
-
-    row -= 1;
-
-    if (row >= 0) {
-        this->checker[INDEX(row, col)] = chess;
-        return true;
-    }
-    else
-        return false;
-}
-
-Board * new_Board(int width, int height) {
-    Board * this = malloc(sizeof(Board));
-    this->win = false;
-    this->width = width;
-    this->height = height;
-    this->checker = malloc(sizeof(char) * width * height);
-
-    clear_Board(this);
-
-    return this;
-}
-
-void delete_Board(Board ** toDelete) {
-    Board * this = *toDelete;
-    free(this->checker);
-    free(this);
-    *toDelete = NULL;
-}

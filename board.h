@@ -5,21 +5,24 @@
 
 typedef struct Board {
     bool win;
+    bool full;
     int width;
     int height;
     char* checker;
 } Board;
 
-void checkwin(Board * this, int colNo);
+Board * new_Board(int width, int height);
+
+void delete_Board(Board ** toDelete);
 
 void print_Board(Board * this);
 
 void clear_Board(Board * this);
 
+void checkwin(Board * this, int colNo);
+
+void checkfull(Board * this);
+
 bool put(Board * this, int colNo, char chess);
-
-Board * new_Board(int width, int height);
-
-void delete_Board(Board ** toDelete);
 
 #endif

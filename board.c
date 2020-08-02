@@ -54,7 +54,6 @@ static bool check_Vert(Board * this, int row, int col, char chess) {
 }
 
 static bool check_Diag(Board * this, int row, int col, char chess) {
-    // TODO
     int leftCount = 0;
     int rightCount = 0;
     int leftRowIndex;
@@ -96,11 +95,8 @@ static bool check_Diag(Board * this, int row, int col, char chess) {
             return true;
         }
 
-        /*printf("leftRowIndex: %d, leftColIndex: %d, leftCount: %d\n",*/
-               /*leftRowIndex, leftColIndex, leftCount);*/
         leftRowIndex -= 1;
         leftColIndex += 1;
-        printf("leftCount: %d\n", leftCount);
     }
 
     while (rightColIndex > rightColLimit && rightRowIndex > rowLimit) {
@@ -114,8 +110,6 @@ static bool check_Diag(Board * this, int row, int col, char chess) {
             return true;
         }
 
-        /*printf("rightRowIndex: %d, rightColIndex: %d, rightCount: %d\n",*/
-                /*rightRowIndex, rightColIndex, rightCount);*/
         rightRowIndex -= 1;
         rightColIndex -= 1;
     }

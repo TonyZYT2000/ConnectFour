@@ -1,3 +1,4 @@
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -22,7 +23,7 @@ void delete_Player(Player ** toDelete) {
 int human_Move(Player * this) {
     int col = 0;
 
-    printf("Please enter a column number: ");
+    printf("Player %c, Please enter a column number: ", this->chess);
     scanf("%d", &col);
     
     while (col < 1 || col > this->board->width) {
@@ -40,6 +41,19 @@ int human_Move(Player * this) {
             printf("Invalid column number! Please reenter a column number: ");
             scanf("%d", &col);
         }
+        success = put(this->board, col, this->chess);
+    }
+
+    return col;
+}
+
+int rand_Move(Player * this) {
+    srand(time(0));
+    int col = rand() % this->board->width;
+
+    bool success = put(this->board, col, this->chess);
+    while (!success) {
+        col = rand() % this->board->width;
         success = put(this->board, col, this->chess);
     }
 

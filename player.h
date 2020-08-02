@@ -16,4 +16,6 @@ void delete_Player(Player ** toDelete);
 
 int human_Move(Player * this);
 
+int rand_Move(Player * this);
+
 #endif

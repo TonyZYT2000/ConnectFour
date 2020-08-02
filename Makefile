@@ -23,7 +23,7 @@ driver: $(OBJ_DIR)/driver.o
 ConnectFour.exe: $(OBJECTS)
 	$(CC) $(CFLAGS) -o ConnectFour.exe $(OBJECTS)
 
-tester.exe: $(OBJ_DIR)/board.o $(OBJ_DIR)/test.o
+tester.exe: $(OBJ_DIR)/board.o $(OBJ_DIR)/player.o $(OBJ_DIR)/test.o
 	$(CC) $(CFLAGS) -o tester.exe $(OBJ_DIR)/board.o $(OBJ_DIR)/player.o \
 		$(OBJ_DIR)/test.o
 

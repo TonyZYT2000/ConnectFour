@@ -24,7 +24,8 @@ ConnectFour.exe: $(OBJECTS)
 	$(CC) $(CFLAGS) -o ConnectFour.exe $(OBJECTS)
 
 tester.exe: $(OBJ_DIR)/board.o $(OBJ_DIR)/test.o
-	$(CC) $(CFLAGS) -o tester.exe $(OBJ_DIR)/board.o $(OBJ_DIR)/test.o
+	$(CC) $(CFLAGS) -o tester.exe $(OBJ_DIR)/board.o $(OBJ_DIR)/player.o \
+		$(OBJ_DIR)/test.o
 
 $(OBJ_DIR)/test.o: test.c board.h | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c test.c

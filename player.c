@@ -4,7 +4,7 @@
 #include "player.h"
 
 
-Player * new_Player(char chess, Board * board, void (*move)(Player *)) {
+Player * new_Player(char chess, Board * board, int (*move)(Player *)) {
     Player * this = malloc(sizeof(Player));
     this->chess = chess;
     this->board = board;
@@ -13,7 +13,13 @@ Player * new_Player(char chess, Board * board, void (*move)(Player *)) {
     return this;
 }
 
-void human_Move(Player * this) {
+void delete_Player(Player ** toDelete) {
+    Player * this = *toDelete;
+    free(this);
+    *toDelete = NULL;
+}
+
+int human_Move(Player * this) {
     int col = 0;
 
     printf("Please enter a column number: ");
@@ -36,4 +42,6 @@ void human_Move(Player * this) {
         }
         success = put(this->board, col, this->chess);
     }
+
+    return col;
 }

@@ -1,32 +1,29 @@
 #include <stdio.h>
 #include "board.h"
+#include "player.h"
 
 int main(void) {
     Board * thisBoard = new_Board(7, 6);
+    Player * human1 = new_Player('x', thisBoard, human_Move);
+    Player * human2 = new_Player('o', thisBoard, human_Move);
+    Player * playerArr[] = {human1, human2};
     print_Board(thisBoard);
 
-    int input = 0;
-    char chess = '.';
-    printf("Please enter a col number and a chess: ");
-    scanf("%d,%c", &input, &chess);
-    while (input >= 1 && input <= 7) {
-        bool success = put(thisBoard, input, chess);
-        if (!success) {
-            printf("That col is full!\n");
-            printf("Plese reenter a col number: ");
-            scanf("%d", &input);
-            continue;
-        }
-        checkwin(thisBoard, input);
+    int index = 0;
+    int col = human1->move(human1);
+    checkwin(thisBoard, col);
+    print_Board(thisBoard);
+    while(!thisBoard->win) {
+        index += 1;
+        index %= 2;
+        col = playerArr[index]->move(playerArr[index]);
+        checkwin(thisBoard, col);
         print_Board(thisBoard);
-        if (thisBoard->win) {
-            printf("You win!\n");
-            break;
-        }
-        printf("Please enter a col number and a chess: ");
-        scanf("%d,%c", &input, &chess);
     }
 
+    printf("Player %c win!\n", playerArr[index]->chess);
+    delete_Player(&human1);
+    delete_Player(&human2);
     delete_Board(&thisBoard);
     return 0;
 }

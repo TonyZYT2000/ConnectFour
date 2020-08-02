@@ -8,11 +8,12 @@ typedef struct Player Player;
 struct Player {
     char chess;
     Board* board;
-    void (*move)(Player *);
+    int (*move)(Player *);
 };
 
-Player * new_Player(char chess, Board * board, void (*move)(Player *));
+Player * new_Player(char chess, Board * board, int (*move)(Player *));
+void delete_Player(Player ** toDelete);
 
-void human_Move(Player * this);
+int human_Move(Player * this);
 
 #endif

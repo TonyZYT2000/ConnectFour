@@ -5,7 +5,8 @@
 
 #define GOAL 4
 #define EMPTY '.'
-#define NEWLINE "\n"
+#define NEWLINE '\n'
+#define WHITESPACE ' '
 #define INDEX(X, Y) X * this->width + Y
 
 static bool check_Hori(Board * this, int row, int col, char chess);
@@ -35,14 +36,20 @@ void delete_Board(Board ** toDelete) {
 void print_Board(Board * this) {
     for (int row = 0; row < this->height; row++) {
         for (int col = 0; col < this->width; col++) {
-            printf("%c ", this->checker[INDEX(row, col)]);
+            putchar(this->checker[INDEX(row, col)]);
+            if (col < 9) {
+                putchar(WHITESPACE);
+            } else {
+                putchar(WHITESPACE);
+                putchar(WHITESPACE);
+            }
         }
-        printf(NEWLINE);
+        putchar(NEWLINE);
     }
     for (int col = 0; col < this->width; col++) {
         printf("%d ", col + 1);
     }
-    printf(NEWLINE);
+    putchar(NEWLINE);
 }
 
 void clear_Board(Board * this) {

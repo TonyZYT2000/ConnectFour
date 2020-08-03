@@ -53,9 +53,9 @@ int main(void) {
 
     if (board->win) {
         if (index < humanNum) {
-            printf("Human player %d win! Congratulation!", index + 1);
+            printf("Human player %d win! Congratulation!\n", index + 1);
         } else {
-            printf("Computer player %d win! AI uprising!", index - humanNum + 1);
+            printf("Computer player %d win! AI uprising!\n", index - humanNum + 1);
         }
     } else {
         printf("Board is full. Tie!\n");
@@ -66,5 +66,11 @@ int main(void) {
     }
     free(playerArr);
     delete_Board(&board);
+
+    printf("Press any key to exit :-)");
+    fflush(stdin);
+    getchar();
+    putchar('\n');
+    return 0;
 }
 

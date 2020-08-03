@@ -5,8 +5,9 @@
 #include "player.h"
 
 
-Player * new_Player(char chess, Board * board, int (*move)(Player *)) {
+Player * new_Player(short num, char chess, Board * board, int (*move)(Player *)) {
     Player * this = malloc(sizeof(Player));
+    this->num = num;
     this->chess = chess;
     this->board = board;
     this->move = move;
@@ -23,7 +24,7 @@ void delete_Player(Player ** toDelete) {
 int human_Move(Player * this) {
     int col = 0;
 
-    printf("Player %c, Please enter a column number: ", this->chess);
+    printf("Player %d, Please enter a column number: ", this->num);
     scanf("%d", &col);
     
     while (col < 1 || col > this->board->width) {
@@ -57,5 +58,6 @@ int rand_Move(Player * this) {
         success = put(this->board, col, this->chess);
     }
 
+    printf("Computer player %d put at column %d\n", this->num, col);
     return col;
 }

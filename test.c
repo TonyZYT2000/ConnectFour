@@ -4,9 +4,9 @@
 
 int main(void) {
     Board * thisBoard = new_Board(7, 6);
-    Player * human1 = new_Player('x', thisBoard, human_Move);
-    Player * human2 = new_Player('o', thisBoard, human_Move);
-    Player * computer = new_Player('c', thisBoard, rand_Move);
+    Player * human1 = new_Player(1, 'x', thisBoard, human_Move);
+    Player * human2 = new_Player(2, 'o', thisBoard, human_Move);
+    Player * computer = new_Player(3, 'c', thisBoard, rand_Move);
     Player * playerArr[] = {human1, human2, computer};
     print_Board(thisBoard);
 
